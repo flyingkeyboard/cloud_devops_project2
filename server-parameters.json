@@ -1,0 +1,37 @@
+[
+	{
+		"ParameterKey": "EnvironmentName",
+		"ParameterValue": "UdacityProject"
+	},
+	{
+		"ParameterKey": "BastionImageId",
+		"ParameterValue": "ami-0ca5c3bd5a268e7db"
+	},
+	{
+		"ParameterKey": "BastionInstanceType",
+		"ParameterValue": "t2.medium"
+	},
+	{
+		"ParameterKey": "WebserverImageId",
+		"ParameterValue": "ami-0ca5c3bd5a268e7db"
+	},
+	
+	{
+		"ParameterKey": "WebserverInstanceType",
+		"ParameterValue": "t2.medium"
+	}
+
+	,
+	{
+		"ParameterKey": "BastionKeyPair",
+		"ParameterValue": "bastion-key"
+	}
+	,
+	{
+		"ParameterKey": "WebserverKeyPair",
+		"ParameterValue": "webserver-key"
+	}
+
+	
+	
+]
