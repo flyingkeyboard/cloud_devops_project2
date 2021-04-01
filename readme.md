@@ -11,6 +11,7 @@ networking components such as Virtual Private Cloud, Elastic Load balancer, Auto
 Apache webserver will be installed on the web server and website code will be deployed from S3 bucket.
 
 
+Below is the architecture diagram:
 ![network diagram](https://raw.githubusercontent.com/flyingkeyboard/cloud_devops_project2/main/First%20Draft%20of%20AWS%20diagram-1.jpeg)
 
 
