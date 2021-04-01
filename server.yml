@@ -1,5 +1,7 @@
 Description: 
     Philip Tao - Project 2
+    This contain resources for load balancer, AutoScalingGroup, Bastion host and Web servers
+
 
 Parameters:
 
