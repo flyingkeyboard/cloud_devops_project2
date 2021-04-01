@@ -50,14 +50,14 @@ There are two Cloudformation template files and two json parameter files.
 The Cloudformation template is a text file that describes a stack, a collection of AWS resources. 
 The json parameter files contain various parameters used by the template.
 
-# Network components
+### Network components
 
 The network.yml contains Cloudformation template for VPC, Subnets, NAT gateway, Route Tables, Routes.
 
 network.yml 
 network-parameters.json
 
-# Server components:
+### Server components:
 
 The server.yml contains Cloudformation template for bastion server, webservers, load balancer, auto scaling groups.
 
