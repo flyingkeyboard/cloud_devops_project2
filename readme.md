@@ -87,4 +87,18 @@ After the infra is created successfully, go the Cloudformation page in the AWS c
 Open the web browser to the Load balancer URL.
 
 
+# Delete infrastructure
+
+Once testing of website is completed.  Do the following to delete both stacks:
+
+Execute the following command:
+aws cloudformation delete-stack --stack-name stack-udc-server --region us-west-2
+
+Check Cloudformation web console to ensure stack-udc-server has been deleted successfully.
+
+Execute the following command:
+aws cloudformation delete-stack --stack-name stack-udc-network --region us-west-2
+
+
+
 

@@ -1,5 +1,5 @@
 Description: 
-    Philip Tao - Project 2
+    Cloud devops Project 2 - Deploy a highly available website
     This contain resources for load balancer, AutoScalingGroup, Bastion host and Web servers
 
 
