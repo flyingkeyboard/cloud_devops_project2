@@ -67,7 +67,7 @@ To deploy the infrastructure for the web application, please ensure that the net
 
 The us-west-2 region is shown in the example below.  Other aws region can be used instead.
 
-Execute the following command to create all the network infra:
+Execute the following command to create network infra:
 
 aws cloudformation create-stack --stack-name stack-udc-network --template-body file://network.yml  --parameters file://network-parameters.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region us-west-2
 
