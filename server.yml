@@ -59,8 +59,8 @@ Resources:
       SecurityGroupIngress:
 
       - IpProtocol: tcp
-        FromPort: 8080
-        ToPort: 8080
+        FromPort: 80
+        ToPort: 80
         CidrIp: 0.0.0.0/0
       - IpProtocol: tcp
         FromPort: 22
@@ -83,7 +83,7 @@ Resources:
       - IpProtocol: tcp
         FromPort: 22
         ToPort: 22
-        CidrIp: 0.0.0.0/0
+        CidrIp: 103.1.212.76/32
       SecurityGroupEgress:
       - IpProtocol: tcp
         FromPort: 0
@@ -118,6 +118,7 @@ Resources:
   BastionHost:
     Type: AWS::EC2::Instance
     Properties: 
+      IamInstanceProfile: !Ref EC2InstanceProfile
       ImageId: !Ref BastionImageId
       KeyName: !Ref BastionKeyPair
       SecurityGroupIds: 
@@ -138,14 +139,23 @@ Resources:
   WebAppLaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
+      IamInstanceProfile: !Ref EC2InstanceProfile
       UserData:
-        Fn::Base64: !Sub 
+        Fn::Base64: !Sub |
           #!/bin/bash
           apt-get update -y
           apt-get install apache2 -y
+          apt install unzip -y
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "/home/ubuntu/awscliv2.zip"
+          unzip /home/ubuntu/awscliv2.zip
+          sudo ./aws/install
+
           systemctl start apache2.service
+
           cd /var/www/html
-          echo "Udacity Demo Web Server Up and Running!" > index.html 
+          aws s3 cp s3://udacity-demo-1/udacity.zip .
+          unzip -o -q udacity.zip
+          
       ImageId: !Ref WebserverImageId
       KeyName: !Ref WebserverKeyPair
       SecurityGroups:
@@ -155,6 +165,7 @@ Resources:
       - DeviceName: "/dev/sdk"
         Ebs:
           VolumeSize: '30'
+      
   WebAppGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -163,8 +174,8 @@ Resources:
           !Sub "${EnvironmentName}-PRIV-NETS"
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
-      MinSize: '2'
-      MaxSize: '4'
+      MinSize: '4'
+      MaxSize: '8'
       TargetGroupARNs:
       - Ref: WebAppTargetGroup
   WebAppLB:
@@ -205,7 +216,7 @@ Resources:
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 8
       HealthyThresholdCount: 2
-      Port: 8080
+      Port: 80
       Protocol: HTTP
       UnhealthyThresholdCount: 5
       VpcId: 
@@ -213,4 +224,17 @@ Resources:
           Fn::Sub: "${EnvironmentName}-VPCID"      
 
   
+Outputs: 
+
+  WebAppLB: 
+    Description: The URL of the LoadBalancer
+    Value: !Sub http://${WebAppLB.DNSName}
     
+  BastionHost: 
+    Description: The DNS name of Bastion host
+    Value: !Sub ${BastionHost.PublicDnsName}
+
+
+    
+
+   
