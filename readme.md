@@ -20,16 +20,14 @@ Below is the architecture diagram:
 Below are requirements to run Cloudformation to deploy the web site and all networking infra to AWS.
 
 
-Require AWS account with Administrative privileges to create VPC, IAM role, Subnets, Route Tables, Routes,  EC2, Load balancers, Autoscaling group NAT instances etc.
+1. AWS account with Administrative privileges to create VPC, IAM role, Subnets, Route Tables, Routes,  EC2, Load balancers, Autoscaling group NAT instances etc.
 
-Require AWS API keys use AWS CLI to create stack using cloudformation template.   
+2. AWS API keys use AWS CLI to create stack using cloudformation template.   
 
-Require AWS CLI tool and  AWS API credential.
+3. AWS CLI tool and  AWS API credential.
 
-AWS Access Key ID,AWS Secret Access Key,Default region name,Default output format
-
-The Bastion host requires a EC2 key pair named BastionKeyPair 
-The Web server requires a EC2 key pair named WebserverKeyPair
+4. The Bastion host requires a EC2 key pair named BastionKeyPair 
+5. The Web server requires a EC2 key pair named WebserverKeyPair
 
 ### Installing
 
